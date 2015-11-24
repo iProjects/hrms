@@ -4,7 +4,7 @@
 
     <head id="header">
 
-        <title>Create User | Hotel Reservation Management System</title>
+        <title>Create Rate Type | Hotel Reservation Management System</title>
 
         <meta name="viewport" content="width=device-width" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -60,7 +60,7 @@
 
                         <div id="divtitle">
 
-                            <span class="pagetitle">Hotel Reservation Management System - Create User</span>
+                            <span class="pagetitle">Hotel Reservation Management System - Create Rate Type</span>
 
                         </div>
 
@@ -119,63 +119,23 @@
 
                         <div style="clear: both;float: left;">
 
-                            <form id="wizard" action="../../DAL/CreateUser.php" method="POST"  enctype="multipart/form-data">
+                            <form id="wizard" action="../../DAL/CreateRateType.php" method="POST"  enctype="multipart/form-data">
 
-                                <h1>Login Info</h1>
+                                <h1>Rate Type Details Info</h1>
                                 <fieldset class="fieldset">
-                                    <legend>Specify User Login Info</legend>
+                                    <legend>Specify Rate Type Details Info</legend>
 
                                     <div class="divcol1container divcontainer">
 
                                         <div class="divcol1">
 
-                                            <div class="divlabel"><span>User Name : </span></div>
+                                            <div class="divlabel"><span>Description : </span></div>
 
                                             <div class="divinput">
-                                                <input id="txtemail" name="txtemail" type="text" autocomplete="autocomplete" placeholder="User Name" title="User Name"   />
+                                                <input id="txtrt_description" name="txtrt_description" type="text" autocomplete="autocomplete" placeholder="Description" title="Description"   />
                                             </div>
 
                                         </div>
-
-                                        <div class="divcol1">
-
-                                            <div class="divlabel"><span>Password : </span></div>
-
-                                            <div class="divinput">
-                                                <input id="txtpwd" name="txtpwd"  type="password" autocomplete="autocomplete" placeholder="Password" title="Password"   />
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </fieldset>
-
-                                <h1>Contact Info</h1>
-                                <fieldset class="fieldset">
-                                    <legend>Specify User Contact Info</legend>
-
-                                    <div class="divcol1container divcontainer">
-
-                                        <div class="divcol1">
-
-                                            <div class="divlabel"><span>Phone : </span></div>
-
-                                            <div class="divinput">
-                                                <input id="txtphone"  name="txtphone" type="tel" autocomplete="autocomplete" placeholder="Phone" title="Phone"   style="padding: 5px !important; padding-left: 50px !important; min-height: 20px !important; width: 99% !important;" />
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </fieldset>
-
-                                <h1>Admin Info</h1>
-                                <fieldset class="fieldset">
-                                    <legend>Specify Admin Info</legend>
-
-                                    <div class="divcol1container divcontainer">
 
                                         <div class="divcol1">
 
@@ -187,7 +147,7 @@
                                                 try {
 
                                                     //select all from db where status is yes
-                                                    $sql_select = "SELECT * FROM hrms_statuses where status_status in ('Y')";
+                                                    $sql_select = "SELECT * FROM hrms_statuses";
                                                     //stmt and conn variables are defined in MySqlConnection.php. Call the connection object and 
                                                     //pass the select query and assign the result into stmt.
                                                     $stmt = $conn->query($sql_select);
@@ -228,53 +188,6 @@
 
                                         </div>
 
-                                        <div class="divcol1">
-
-                                            <div class="divlabel"><span>Role : </span></div>
-
-                                            <div class="divinput">
-
-                                                <?php
-                                                try {
-                                                    $sql_select = "SELECT * FROM hrms_roles where role_status in ('Y')";
-                                                    $stmt = $conn->query($sql_select);
-                                                    $roles = $stmt->fetchAll();
-//
-                                                    echo '<select name="cborole" id="cborole" title="Role" style="width: 20px;">';
-                                                    echo '<option selected value="">Select Role</option>';
-                                                    if (count($roles) > 0) {
-
-                                                        foreach ($roles as $role) {
-                                                            echo "<option value=" . $role['auto_id'] . ">" . $role['role_description'] . "</option>";
-                                                        }
-                                                    }
-                                                    echo "</select>";
-//
-                                                    $stmt->closeCursor();
-
-                                                    CloseConnection();
-//                                                    
-                                                } catch (Exception $e) {
-                                                    $errormsg .= $e->getMessage();
-                                                    if ($e->getTraceAsString() != NULL) {
-                                                        $errormsg .= "<br/>" . $e->getTraceAsString();
-                                                    }
-                                                    if (error_get_last() != NULL) {
-                                                        $errormsg .= "<br/>" . error_get_last();
-                                                    }
-                                                    $errormsg .= '<br/><input type="button" value="Back" onclick="window.history.go(-1); return false;" />';
-                                                    $_SESSION['servererrormessage'] = $errormsg;
-                                                    echo ($errormsg);
-                                                    header("Location: ../Views/Account/error_message_view.php");
-                                                }
-                                                ?>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
                                 </fieldset>
 
                                 <h1>Finish</h1>
@@ -312,7 +225,7 @@
 
         <script language="javascript" type="text/javascript">
 
-            $(document).ready(function () {
+            $(document).ready(function() {
                 try {
                     RedirectToLoginIfUserIsNotLoggedIn();
                 }
@@ -331,7 +244,7 @@
 
         <script language="javascript" type="text/javascript">
 
-            $(document).ready(function () {
+            $(document).ready(function() {
                 try {
 
                     RedirectToLoginIfUserIsNotLoggedIn();
@@ -343,45 +256,6 @@
                     CreateSubMenu();
 
                     refreshAnchorTags();
-
-                    $("#txtphone").intlTelInput({
-                        // typing digits after a valid number will be added to the extension part of the number 
-                        allowExtensions: false,
-                        // automatically format the number according to the selected country 
-                        autoFormat: true,
-                        // If there is just a dial code in the input: remove it on blur, and re-add it on focus. 
-                        //This is to prevent just a dial code getting submitted with the form. 
-                        // Requires nationalMode to be set to false.
-                        autoHideDialCode: true,
-                        // add or remove input placeholder with an example number for the selected country 
-                        autoPlaceholder: true,
-                        // default country 
-                        defaultCountry: "ke",
-                        // geoIp lookup function 
-                        //geoIpLookup: null,
-                        // don't insert international dial codes 
-                        nationalMode: false,
-                        // number type to use for placeholders 
-                        numberType: "MOBILE",
-                        // display only these countries 
-                        //onlyCountries: [],
-                        // the countries at the top of the list. defaults to united states and united kingdom 
-                        preferredCountries: ["ke", "ng", "in"],
-                        // specify the path to the libphonenumber script to enable validation/formatting
-                        utilsScript: "../Scripts/intlTelInputUtils.js"
-                    });
-
-                    // Change the country selection                
-                    var country = sessionStorage.getItem("country");
-                    if (country != null && country != undefined) {
-                        console.log(country.toLowerCase());
-                        $("#txtphone").intlTelInput("selectCountry", country.toLowerCase());
-                        var countryData = $("#txtphone").countrySelect("getSelectedCountryData");
-                        console.log(countryData);
-                        console.log(countryData["name"]);
-                        console.log(countryData["iso2"]);
-                        console.log(countryData["dialCode"]);
-                    }
 
                 }
                 catch (err) {
@@ -453,7 +327,7 @@
                 var SubMenu = [];
                 SubMenu.push('<div class="nav"><ul class="menu">');
                 SubMenu
-                        .push('<li><a href="../../Views/User/Create.php" style="cursor: pointer;" title="Create">Create</a></li>');
+                        .push('<li><a href="../../Views/RateType/Create.php" style="cursor: pointer;" title="Create">Create</a></li>');
                 SubMenu.push('</ul></div>');
 
                 $("#SubMenu").html(SubMenu.join(" "));
@@ -520,39 +394,19 @@
                 var error_free = true;
 
                 // Validate the entries 
-                var email = $('#txtemail').val();
-                var pwd = $('#txtpwd').val();
-                var phone = $('#txtphone').val();
-                var isphonevalid = $("#mobile-number").intlTelInput("isValidNumber");
+                var description = $('#txtrt_description').val();
                 var status = $('#cbostatus').val();
-                var role = $('#cborole').val();
 
-                if (email.length == 0) {
-                    errormsg += '<li>' + " Email cannot be null " + '</li>';
-                    error_free = false;
-                }
-                if (pwd.length == 0) {
-                    errormsg += '<li>' + " Password cannot be null " + '</li>';
-                    error_free = false;
-                }
-                if (phone.length == 0) {
-                    errormsg += '<li>' + " Phone cannot be null " + '</li>';
-                    error_free = false;
-                }
-                if (!isphonevalid) {
-                    errormsg += '<li>' + " Phone number is not in a valid format " + '</li>';
+                if (description.length == 0) {
+                    errormsg += '<li>' + " Description cannot be null " + '</li>';
+                    $('#txtrt_description').focus();
                     error_free = false;
                 }
                 if (status.length == 0) {
                     errormsg += '<li>' + " Select Status " + '</li>';
-                    $('#txtusername').focus();
+                    $('#cbostatus').focus();
                     error_free = false;
                 }
-                if (role.length == 0) {
-                    errormsg += '<li>' + " Select Role " + '</li>';
-                    error_free = false;
-                }
-
 
                 if (!error_free) {
                     errormsg += "</ul>";
@@ -561,7 +415,7 @@
                     $("#error-display-div").addClass('displayblock');
                     $("#error-display-div").show();
                     $('html, body').animate({scrollTop: '0px'}, 500);
-                    $('#txtusername').focus();
+                    $('#txtrt_description').focus();
                     window.setTimeout('ClearMessageControls();', 60000);
 
                     return error_free;
@@ -614,7 +468,7 @@
                 //onStepChanged: function (event, currentIndex, priorIndex) { }, // Fires after the step has change. 
                 //onFinishing: function (event, currentIndex) { return true; }, // Fires before finishing and can be used to prevent completion by returning `false`. 
                 //onFinished: function (event, currentIndex) { }, // Fires after completion. 
-                onStepChanging: function (event, currentIndex, newIndex) {
+                onStepChanging: function(event, currentIndex, newIndex) {
                     // Always allow going backward even if the current step contains invalid fields!
                     if (currentIndex > newIndex) {
                         return true;
@@ -628,103 +482,23 @@
 
                     if (currentIndex === 0) {
 
-                        errormsg = '';
-                        errormsg += '<ul class="errorList">';
-
                         createValidationControls();
 
                         errormsg = '';
                         errormsg += '<ul class="errorList">';
-
-                        createValidationControls();
 
                         // Validate the entries 
-                        var email = $('#txtemail').val();
-                        var pwd = $('#txtpwd').val();
-
-                        if (email.length == 0) {
-                            errormsg += '<li>' + " Email cannot be null " + '</li>';
-                            error_free = false;
-                        }
-                        if (pwd.length == 0) {
-                            errormsg += '<li>' + " Password cannot be null " + '</li>';
-                            error_free = false;
-                        }
-
-                        if (!error_free) {
-                            errormsg += "</ul>";
-                            $("#error-display-div").html(errormsg);
-                            $("#error-display-div").removeClass('displaynone');
-                            $("#error-display-div").addClass('displayblock');
-                            $("#error-display-div").show();
-                            $('html, body').animate({scrollTop: '0px'}, 500);
-                            window.setTimeout('ClearMessageControls();', 10000);
-                            return false;
-                        } else {
-                            ClearException();
-                            ClearMessageControls();
-                            return true;
-                        }
-                    }
-
-                    if (currentIndex === 1) {
-
-                        createValidationControls();
-
-                        errormsg = '';
-                        errormsg += '<ul class="errorList">';
-
-                        // Validate the entries  
-                        var phone = $('#txtphone').val();
-                        var isphonevalid = $("#mobile-number").intlTelInput("isValidNumber");
-
-                        if (phone.length == 0) {
-                            errormsg += '<li>' + " Phone cannot be null " + '</li>';
-                            error_free = false;
-                        }
-                        if (!isphonevalid) {
-                            errormsg += '<li>' + " Phone number is not in a valid format " + '</li>';
-                            error_free = false;
-                        }
-
-                        if (!error_free) {
-                            errormsg += "</ul>";
-                            $("#error-display-div").html(errormsg);
-                            $("#error-display-div").removeClass('displaynone');
-                            $("#error-display-div").addClass('displayblock');
-                            $("#error-display-div").show();
-                            $('html, body').animate({scrollTop: '0px'}, 500);
-                            window.setTimeout('ClearMessageControls();', 10000);
-                            return false;
-                        } else {
-                            ClearException();
-                            ClearMessageControls();
-                            return true;
-                        }
-                    }
-
-                    if (currentIndex === 2) {
-                        errormsg = '';
-                        errormsg += '<ul class="errorList">';
-
-                        createValidationControls();
-
-                        errormsg = '';
-                        errormsg += '<ul class="errorList">';
-
-                        createValidationControls();
-
-                        // Validate the entries 
+                        var description = $('#txtrt_description').val();
                         var status = $('#cbostatus').val();
-                        var role = $('#cborole').val();
 
+                        if (description.length == 0) {
+                            errormsg += '<li>' + " Description cannot be null " + '</li>';
+                            $('#txtrt_description').focus();
+                            error_free = false;
+                        }
                         if (status.length == 0) {
                             errormsg += '<li>' + " Select Status " + '</li>';
-                            $('#txtusername').focus();
-                            error_free = false;
-                        }
-                        if (role.length == 0) {
-                            errormsg += '<li>' + " Select Role " + '</li>';
+                            $('#cbostatus').focus();
                             error_free = false;
                         }
 
@@ -746,13 +520,13 @@
 
                     return error_free;
                 },
-                onStepChanged: function (event, currentIndex, priorIndex) {
+                onStepChanged: function(event, currentIndex, priorIndex) {
 
                     if (currentIndex === 1) {
 
                     }
                 },
-                onFinishing: function (event, currentIndex) {
+                onFinishing: function(event, currentIndex) {
 
                     createValidationControls();
 
@@ -768,7 +542,7 @@
                     }
                     return true;
                 },
-                onFinished: function (event, currentIndex) {
+                onFinished: function(event, currentIndex) {
 
                     return true;
                 },
@@ -780,15 +554,15 @@
                     previous: "Previous", // Label for the previous button.
                     loading: "Loading ..." // Label for the loading animation.
                 },
-                onInit: function (event, currentIndex) {
+                onInit: function(event, currentIndex) {
 
                 },
-                onCanceled: function (event) {
+                onCanceled: function(event) {
 
                 }
             });
 
-            $('#wizard h1').on("click", function (e) {
+            $('#wizard h1').on("click", function(e) {
 
                 $("#wizard h1").attr('disabled', true);
                 e.preventDefault();

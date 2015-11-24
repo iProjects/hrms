@@ -157,7 +157,7 @@
                                             foreach ($payment_methods as $payment_method) {
                                                 echo "<tr>";
                                                 echo "<td>" . $payment_method['auto_id'] . "</td>";
-                                                echo "<td>" . $payment_method['us_email'] . "</td>";
+                                                echo "<td>" . $payment_method['hrms_payment_methods'] . "</td>";
                                                 echo "<td>" . $payment_method['us_pwd'] . "</td>";
                                                 echo "<td>" . $payment_method['us_telephone'] . "</td>";
                                                 echo "<td>" . $payment_method['us_status'] . "</td>";

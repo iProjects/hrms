@@ -4,7 +4,7 @@
 
     <head id="header">
 
-        <title>Create User | Hotel Reservation Management System</title>
+        <title>Create Payment Method | Hotel Reservation Management System</title>
 
         <meta name="viewport" content="width=device-width" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -60,7 +60,7 @@
 
                         <div id="divtitle">
 
-                            <span class="pagetitle">Hotel Reservation Management System - Create User</span>
+                            <span class="pagetitle">Hotel Reservation Management System - Create Payment Method</span>
 
                         </div>
 
@@ -119,7 +119,7 @@
 
                         <div style="clear: both;float: left;">
 
-                            <form id="wizard" action="../../DAL/CreateUser.php" method="POST"  enctype="multipart/form-data">
+                            <form id="wizard" action="../../DAL/CreatePaymentMethod.php" method="POST"  enctype="multipart/form-data">
 
                                 <h1>Login Info</h1>
                                 <fieldset class="fieldset">

@@ -315,7 +315,7 @@
                                             <div class="divlabel"><span>No of Beds : </span></div>
 
                                             <div class="divinput">
-                                                <input id="txtroom_no_of_beds"  name="txtroom_no_of_beds" type="text" autocomplete="autocomplete" placeholder="No of Beds" title="No of Beds" />
+                                                <input id="txtroom_no_of_beds"  name="txtroom_no_of_beds" type="number" autocomplete="autocomplete" placeholder="No of Beds" title="No of Beds" />
                                             </div>
 
                                         </div>

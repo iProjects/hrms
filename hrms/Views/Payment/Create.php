@@ -4,7 +4,7 @@
 
     <head id="header">
 
-        <title>Create User | Hotel Reservation Management System</title>
+        <title>Create payment | Hotel Reservation Management System</title>
 
         <meta name="viewport" content="width=device-width" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
